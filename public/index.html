@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PULSE_WIREFRAME // SYSTEM ARCHIVE</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+
+  <style>
+    :root {
+      --bg: #0d0e11;
+      --paper: #121418;
+      --paper-dim: #181b22;
+      --grid-line: #222631;
+      --grid-line-bright: #363c4d;
+      --ink: #d4d8e3;
+      --ink-dim: #6c7385;
+      --ink-muted: #424756;
+      --signal-cyan: #4bf2c8;
+      --signal-amber: #f5a623;
+      --signal-red: #ff4d4d;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--ink);
+      font-family: 'Space Mono', 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      line-height: 1.5;
+      letter-spacing: -0.01em;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background-image: 
+        linear-gradient(to right, rgba(34, 38, 49, 0.4) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(34, 38, 49, 0.4) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+
+    /* Archival Wireframe Borders */
+    .wire-border {
+      border: 1px solid var(--grid-line);
+      background-color: var(--paper);
+      position: relative;
+    }
+
+    .wire-border-dim {
+      border: 1px dashed var(--grid-line-bright);
+    }
+
+    /* Corner markings for architectural blueprint look */
+    .blueprint-mark {
+      position: relative;
+    }
+    .blueprint-mark::before,
+    .blueprint-mark::after {
+      content: '+';
+      position: absolute;
+      font-size: 10px;
+      color: var(--ink-dim);
+      line-height: 1;
+      pointer-events: none;
+    }
+    .blueprint-mark::before { top: 3px; left: 4px; }
+    .blueprint-mark::after { bottom: 3px; right: 4px; }
+
+    /* Custom Scrollbar for Raw Log Analyzers */
+    ::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--paper);
+      border-left: 1px solid var(--grid-line);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--grid-line-bright);
+    }
+
+    /* Terminal typography hierarchy */
+    .label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ink-dim);
+    }
+
+    .stat-val {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 26px;
+      font-weight: 500;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      color: #ffffff;
+    }
+
+    /* Minimalist Raw Wireframe Gauge */
+    .ascii-bar {
+      letter-spacing: 0.1em;
+      font-size: 9px;
+      white-space: pre;
+    }
+
+    .btn-wire {
+      background: transparent;
+      border: 1px solid var(--grid-line-bright);
+      color: var(--ink);
+      padding: 4px 10px;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: all 0.1s ease;
+    }
+    .btn-wire:hover {
+      background: var(--ink);
+      color: var(--bg);
+    }
+    .btn-wire.active {
+      background: var(--signal-cyan);
+      color: #000;
+      border-color: var(--signal-cyan);
+    }
+
+    .dot-live {
+      width: 6px;
+      height: 6px;
+      background-color: var(--signal-cyan);
+      display: inline-block;
+      margin-right: 6px;
+    }
+
+    /* Table rules */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    th, td {
+      padding: 6px 8px;
+      border-bottom: 1px solid var(--grid-line);
+    }
+    th {
+      font-size: 9px;
+      text-transform: uppercase;
+      color: var(--ink-dim);
+      font-weight: 400;
+      background: var(--paper-dim);
+    }
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+  </style>
+</head>
+<body>
+  <div id="app" class="p-4 sm:p-6 max-w-7xl mx-auto space-y-4">
+    
+    <!-- Top Metadata Header -->
+    <header class="wire-border p-4 blueprint-mark flex flex-wrap items-center justify-between gap-4">
+      <div>
+        <div class="flex items-center space-x-2">
+          <span class="dot-live"></span>
+          <span class="label">ARCHIVAL MONITOR ENGINE // REF: PW-2026-X1</span>
+        </div>
+        <h1 class="text-xl font-bold tracking-tight text-white mt-1 uppercase">PULSE WIREFRAME [KERNEL DIAGNOSTIC]</h1>
+      </div>
+
+      <div class="flex items-center space-x-6 text-right font-mono text-[10px]">
+        <div>
+          <div class="label">ENGINE BIND</div>
+          <div class="text-white">127.0.0.1:9099 [AXUM]</div>
+        </div>
+        <div>
+          <div class="label">HERD PROXY</div>
+          <div class="text-white">pulse-monitor-rust.test</div>
+        </div>
+        <div>
+          <div class="label">STATUS</div>
+          <div :class="connected ? 'text-emerald-400' : 'text-red-400'">{{ connected ? 'STREAM_SYNC_OK' : 'CONN_DROP' }}</div>
+        </div>
+        <div>
+          <button @click="reconnect" class="btn-wire">POLL RESYNC</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Blueprint Technical Data Strip -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <!-- CPU Metric Block -->
+      <div class="wire-border p-4 blueprint-mark space-y-2">
+        <div class="flex justify-between items-baseline">
+          <span class="label">CPU_GLOBAL_LOAD</span>
+          <span class="label">SYSINFO_30</span>
+        </div>
+        <div class="stat-val">{{ metrics.cpu_global ? metrics.cpu_global.toFixed(1) : '0.0' }}%</div>
+        <div class="ascii-bar text-emerald-400">{{ renderAsciiBar(metrics.cpu_global || 0, 100, 20) }}</div>
+        <div class="text-[9px] text-zinc-500 font-mono">CORES DETECTED: {{ metrics.cpu_cores ? metrics.cpu_cores.length : 0 }} ACTIVE</div>
+      </div>
+
+      <!-- Memory Metric Block -->
+      <div class="wire-border p-4 blueprint-mark space-y-2">
+        <div class="flex justify-between items-baseline">
+          <span class="label">PHYSICAL_MEM_USAGE</span>
+          <span class="label">SYS_RAM</span>
+        </div>
+        <div class="stat-val">{{ formatBytes(metrics.mem_used_bytes || 0) }}</div>
+        <div class="ascii-bar text-amber-400">{{ renderAsciiBar(metrics.mem_used_bytes || 0, metrics.mem_total_bytes || 1, 20) }}</div>
+        <div class="text-[9px] text-zinc-500 font-mono">POOL: {{ formatBytes(metrics.mem_total_bytes || 0) }} TOTAL</div>
+      </div>
+
+      <!-- Network I/O Block -->
+      <div class="wire-border p-4 blueprint-mark space-y-2">
+        <div class="flex justify-between items-baseline">
+          <span class="label">NETWORK_PACKET_I/O</span>
+          <span class="label">RAW_SOCKET</span>
+        </div>
+        <div class="stat-val">{{ formatBytes(metrics.net_in_bytes || 0) }}</div>
+        <div class="text-[9px] text-zinc-400 font-mono">
+          <div>TX: {{ formatBytes(metrics.net_out_bytes || 0) }}</div>
+          <div class="text-zinc-500">RX_ACCUMULATED_BUFFER</div>
+        </div>
+      </div>
+
+      <!-- Kernel Uptime & Processes -->
+      <div class="wire-border p-4 blueprint-mark space-y-2">
+        <div class="flex justify-between items-baseline">
+          <span class="label">SYSTEM_KERNEL_TICKS</span>
+          <span class="label">UPTIME</span>
+        </div>
+        <div class="stat-val">{{ formatUptime(metrics.uptime_secs || 0) }}</div>
+        <div class="text-[9px] text-zinc-400 font-mono">
+          <div>PROCESS_POOL: {{ metrics.process_count || 0 }} THREADS</div>
+          <div class="text-zinc-500">SWAP: {{ formatBytes(metrics.swap_used_bytes || 0) }} / {{ formatBytes(metrics.swap_total_bytes || 0) }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Workspace: Core Breakdown & Process Table -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+      
+      <!-- Multi-Core Raw Spectrum (Left Col) -->
+      <div class="wire-border p-4 blueprint-mark space-y-3">
+        <div class="flex justify-between items-center pb-2 border-b border-zinc-800">
+          <span class="label">CPU_CORE_MATRIX [RAW VECTORS]</span>
+          <span class="text-[9px] text-zinc-500">N={{ metrics.cpu_cores ? metrics.cpu_cores.length : 0 }}</span>
+        </div>
+
+        <div class="space-y-1.5 max-h-[360px] overflow-y-auto pr-1">
+          <div v-for="(coreLoad, idx) in metrics.cpu_cores" :key="idx" class="flex items-center justify-between text-[10px] font-mono border-b border-zinc-900 pb-1">
+            <span class="text-zinc-400 w-12">CORE_{{ String(idx).padStart(2, '0') }}</span>
+            <span class="ascii-bar text-zinc-300">{{ renderAsciiBar(coreLoad, 100, 12) }}</span>
+            <span class="text-white w-12 text-right">{{ coreLoad.toFixed(0) }}%</span>
+          </div>
+        </div>
+
+        <!-- Mount Storage Points -->
+        <div class="pt-3 border-t border-zinc-800">
+          <div class="label mb-2">STORAGE_MOUNTS</div>
+          <div v-for="d in metrics.disks" :key="d.mount_point" class="text-[10px] font-mono space-y-0.5">
+            <div class="flex justify-between text-zinc-400">
+              <span>{{ d.mount_point }}</span>
+              <span>{{ formatBytes(d.total_bytes - d.available_bytes) }} / {{ formatBytes(d.total_bytes) }}</span>
+            </div>
+            <div class="ascii-bar text-zinc-400">{{ renderAsciiBar(d.total_bytes - d.available_bytes, d.total_bytes, 24) }}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Raw Process Table & Inspection (Right 2 Cols) -->
+      <div class="lg:col-span-2 wire-border p-4 blueprint-mark flex flex-col justify-between">
+        <div>
+          <div class="flex flex-wrap justify-between items-center pb-2 border-b border-zinc-800 gap-2">
+            <div class="flex items-center space-x-2">
+              <span class="label">ACTIVE_PROCESS_POOL [SORT: CPU_UTILIZATION_DESC]</span>
+            </div>
+            <div class="flex space-x-2 text-[9px] font-mono">
+              <button @click="refreshProcesses" class="btn-wire">REFRESH PROCESSES</button>
+            </div>
+          </div>
+
+          <div class="mt-2 overflow-x-auto max-h-[420px] overflow-y-auto">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 80px;">PID</th>
+                  <th>IDENTIFIER_NAME</th>
+                  <th style="width: 100px; text-align: right;">CPU%</th>
+                  <th style="width: 140px; text-align: right;">RESIDENT_MEM</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="p in processes" :key="p.pid" class="font-mono text-[10px]">
+                  <td class="text-zinc-500">{{ p.pid }}</td>
+                  <td class="text-zinc-200 font-bold">{{ p.name }}</td>
+                  <td class="text-right" :class="p.cpu_usage > 10 ? 'text-amber-400' : 'text-zinc-300'">
+                    {{ p.cpu_usage.toFixed(1) }}%
+                  </td>
+                  <td class="text-right text-zinc-400">{{ formatBytes(p.mem_bytes) }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="pt-3 mt-4 border-t border-zinc-800 flex flex-wrap justify-between text-[9px] text-zinc-500 font-mono">
+          <span>KERNEL_DATA_REFRESH: ~1000MS</span>
+          <span>BUFFER: ZERO_HEAP_SPILL // RUST AXUM TOKIO</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Archival Event Log Terminal Section -->
+    <div class="wire-border p-4 blueprint-mark">
+      <div class="flex justify-between items-center pb-2 border-b border-zinc-800">
+        <span class="label">REAL-TIME TELEMETRY LOG ANALYZER // RAW CHRONO DUMP</span>
+        <button @click="clearLogs" class="btn-wire text-[9px]">PURGE VIEW</button>
+      </div>
+
+      <div class="mt-2 max-h-[140px] overflow-y-auto font-mono text-[10px] space-y-1 pr-1 bg-black/40 p-2 wire-border-dim">
+        <div v-for="(l, i) in logStream" :key="i" class="flex space-x-3">
+          <span class="text-zinc-500">{{ l.time }}</span>
+          <span :class="l.level === 'WARN' ? 'text-amber-400' : l.level === 'ERR' ? 'text-red-400' : 'text-emerald-400'">[{{ l.level }}]</span>
+          <span class="text-zinc-300">{{ l.msg }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Technical Footer -->
+    <footer class="pt-2 border-t border-zinc-800 flex flex-wrap justify-between items-center text-[9px] text-zinc-500 font-mono">
+      <div>PULSE WIREFRAME • ARCHIVAL RAW & MONOSPACED SPECIFICATION</div>
+      <div class="flex space-x-4">
+        <span>RUST CARGO 0.1.0</span>
+        <span>SYSINFO 0.30</span>
+        <span>VUE 3 REACTIVE</span>
+        <span>ZERO_SLOP_CERTIFIED</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    const { createApp, ref, onMounted, onUnmounted } = Vue;
+
+    createApp({
+      setup() {
+        const metrics = ref({});
+        const processes = ref([]);
+        const connected = ref(false);
+        const logStream = ref([]);
+        let timer = null;
+
+        const pushLog = (level, msg) => {
+          logStream.value.unshift({
+            time: new Date().toISOString().substring(11, 23),
+            level,
+            msg
+          });
+          if (logStream.value.length > 50) logStream.value.pop();
+        };
+
+        const fetchMetrics = async () => {
+          try {
+            const res = await fetch('http://127.0.0.1:9099/api/v1/metrics');
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            metrics.value = await res.json();
+            connected.value = true;
+          } catch (e) {
+            connected.value = false;
+            pushLog('ERR', 'Metrics fetch failed: ' + e.message);
+          }
+        };
+
+        const fetchProcesses = async () => {
+          try {
+            const res = await fetch('http://127.0.0.1:9099/api/v1/processes');
+            if (res.ok) {
+              processes.value = await res.json();
+            }
+          } catch (e) {
+            console.error(e);
+          }
+        };
+
+        const formatBytes = (bytes) => {
+          if (!bytes || bytes === 0) return '0 B';
+          const units = ['B', 'KB', 'MB', 'GB', 'TB'];
+          const i = Math.floor(Math.log(bytes) / Math.log(1024));
+          return (bytes / Math.pow(1024, i)).toFixed(1) + ' ' + units[i];
+        };
+
+        const formatUptime = (secs) => {
+          const h = Math.floor(secs / 3600);
+          const m = Math.floor((secs % 3600) / 60);
+          const s = secs % 60;
+          return `${h}H ${m}M ${s}S`;
+        };
+
+        const renderAsciiBar = (val, max, width = 16) => {
+          const ratio = Math.min(Math.max(val / max, 0), 1);
+          const filled = Math.round(ratio * width);
+          const empty = width - filled;
+          return '[' + '='.repeat(filled) + '-'.repeat(empty) + ']';
+        };
+
+        const reconnect = async () => {
+          pushLog('SYS', 'Forcing telemetry cycle resync...');
+          await fetchMetrics();
+          await fetchProcesses();
+        };
+
+        const clearLogs = () => {
+          logStream.value = [];
+        };
+
+        onMounted(async () => {
+          pushLog('INIT', 'Mounting Pulse Wireframe diagnostic controller...');
+          await fetchMetrics();
+          await fetchProcesses();
+          pushLog('OK', 'Kernel telemetry established on 127.0.0.1:9099');
+          
+          timer = setInterval(async () => {
+            await fetchMetrics();
+            if (Math.random() > 0.7) await fetchProcesses();
+          }, 1000);
+        });
+
+        onUnmounted(() => {
+          if (timer) clearInterval(timer);
+        });
+
+        return {
+          metrics,
+          processes,
+          connected,
+          logStream,
+          formatBytes,
+          formatUptime,
+          renderAsciiBar,
+          reconnect,
+          refreshProcesses: fetchProcesses,
+          clearLogs
+        };
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>
